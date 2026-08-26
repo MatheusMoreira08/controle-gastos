@@ -1,23 +1,22 @@
 // ============================================================
 // FIREBASE CONFIGURATION
-// Substitua os valores abaixo pelas credenciais do seu projeto Firebase.
-// Copie de: Firebase Console → Configurações do projeto → Seus apps → Web app
 // ============================================================
 
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyCVlteGi_pL8T8_FZUBnlNanmBsx4Ljl8Y",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "controle-gastos-16239.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "controle-gastos-16239",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "controle-gastos-16239.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "260421043080",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:260421043080:web:18bfba8b9368d4d544b03d",
 };
 
-const app = initializeApp(firebaseConfig);
+// Evita reinicialização em HMR
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
